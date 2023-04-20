@@ -14,8 +14,6 @@ import {
     AlertIcon,
     Alert,
     useColorModeValue,
-    AlertTitle,
-    AlertDescription,
 } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
@@ -138,15 +136,7 @@ const Cadastro = () => {
                         <Link color={linkColor} onClick={handleLoginClick}>Já tem conta?</Link>
                     </Stack>
                     
-                    {/* {erro && ( <Alert status="error" mt={4}><AlertIcon />{erro}</Alert>)} */}
-
-                    {erro && (
-                        <Alert status="error" mt={4}>
-                            <AlertIcon />
-                            <AlertTitle mr={2}>Erro!</AlertTitle>
-                            <AlertDescription>{erro}</AlertDescription>
-                        </Alert>
-                        )}
+                    {erro && ( <Alert status="error" mt={4}><AlertIcon />{erro}</Alert>)}
                     
                     <Button colorScheme="blue" onClick={handleCadastrar}>Cadastrar</Button>
                 </Stack>
