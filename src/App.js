@@ -7,10 +7,10 @@ function App() {
   return (
     <ChakraProvider theme={theme}>
       <ColorModeSwitcher 
-        justifySelf="flex-end" 
+        justifySelf="flex-end"  
         position="absolute" 
-        top={4} 
-        right={3} 
+        top={5} 
+        right={4} 
       />
       <AppRoutes />
     </ChakraProvider>

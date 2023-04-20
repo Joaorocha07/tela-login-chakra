@@ -10,19 +10,19 @@ import {
     Image, 
     Input, 
     Stack,
-    Link,
     AlertIcon,
     Alert,
     useColorModeValue,
+    Icon,
 } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import InputData from "../InputData/index";
 import fundoUnitri from "../../assets/escola.jpg";
 
 const Cadastro = () => {
 
-    const linkColor = useColorModeValue('blue', 'cyan.200');
     const bordaInput = useColorModeValue("#e2e8f0","white.500")
     const [erro, setErro] = useState("");
     const [nome, setNome] = useState("");
@@ -67,7 +67,7 @@ const Cadastro = () => {
     }
 
     return (
-        <HStack w="full" h="100vh">
+        <HStack w="full" h="100vh" justifyContent="space-between">
             <Flex w="full" h="full" borderRightWidth={1} display={{base: 'none', md: 'flex'}}>
                 <Image 
                     src={fundoUnitri}
@@ -76,7 +76,22 @@ const Cadastro = () => {
                     w="full" 
                 />
             </Flex>
+
             <Flex w="full" h="full" alignItems="center" justifyContent="center">
+                <Flex justify="flex-end" alignItems="center" h={{base: 'none', md: '99vh'}} position="relative" justifyContent={{base: 'flex-end', md:'flex-start'}} left={{base: 2, md: -100}}>
+                    <Button
+                        leftIcon={<Icon as={ArrowBackIcon} />}
+                        colorScheme="gray"
+                        variant="outline"
+                        onClick={handleLoginClick}
+                        className="back-button"
+                        position="absolute"
+                        top={{base: -400, md: 5}} 
+                        left={{base: 2, md: 10}} 
+                        zIndex="docked"
+                    />
+                </Flex>
+
                 <Stack w="full" maxW="md" spacing={4} p={6}>
                     <Heading fontSize="2xl" color="blackAlpha" textAlign="center"> 
                         Faça o seu cadastro 
@@ -131,10 +146,6 @@ const Cadastro = () => {
                     </FormControl>
                     
                     <InputData onChange={(data) => console.log(data)} />
-
-                    <Stack spacing={4} direction="row" align="start" justify="space-between">
-                        <Link color={linkColor} onClick={handleLoginClick}>Já tem conta?</Link>
-                    </Stack>
                     
                     {erro && ( <Alert status="error" mt={4}><AlertIcon />{erro}</Alert>)}
                     
