@@ -12,19 +12,25 @@ import {
     Stack,
     Link,
     AlertIcon,
-    Alert
+    Alert,
+    useColorModeValue,
+    AlertTitle,
+    AlertDescription,
 } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router-dom";
+import InputData from "../InputData/index";
+import fundoUnitri from "../../assets/escola.jpg";
 
 const Cadastro = () => {
 
+    const linkColor = useColorModeValue('blue', 'cyan.200');
+    const bordaInput = useColorModeValue("#e2e8f0","white.500")
     const [erro, setErro] = useState("");
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [senhaConfirm, setSenhaConfirm] = useState(""); 
-    const [dataNascimento, setDataNascimento] = useState(""); 
 
     const navigate = useNavigate();
 
@@ -54,7 +60,7 @@ const Cadastro = () => {
             return;
         }
 
-        if (!nome || !email || !senha || !senhaConfirm || !dataNascimento) {
+        if (!nome || !email || !senha || !senhaConfirm) {
             setErro("Preencha todos os campos obrigatórios.");
             return;
         }
@@ -66,7 +72,7 @@ const Cadastro = () => {
         <HStack w="full" h="100vh">
             <Flex w="full" h="full" borderRightWidth={1} display={{base: 'none', md: 'flex'}}>
                 <Image 
-                    src="https://inspirationfeed.com/wp-content/uploads/2016/08/mobile_wallpaper_by_maria_shanina-min.png" 
+                    src={fundoUnitri}
                     h="full"
                     objectFit="cover" 
                     w="full" 
@@ -74,17 +80,19 @@ const Cadastro = () => {
             </Flex>
             <Flex w="full" h="full" alignItems="center" justifyContent="center">
                 <Stack w="full" maxW="md" spacing={4} p={6}>
-                    <Heading fontSize="2xl" color="purple.500" textAlign="center"> 
-                        Faça cadastro 
+                    <Heading fontSize="2xl" color="blackAlpha" textAlign="center"> 
+                        Faça o seu cadastro 
                     </Heading>
                     
                     <FormControl id="nome">
                         <FormLabel>Nome</FormLabel>
                         <Input
-                            type="text" 
+                            type="text"
                             placeholder="Nome"
                             value={nome}
                             onChange={(event) => setNome(event.target.value)}
+                            borderRadius="1rem"
+                            borderColor={bordaInput}
                         />
                     </FormControl>
                     
@@ -95,6 +103,8 @@ const Cadastro = () => {
                             placeholder="Email"
                             value={email}
                             onChange={(event) => setEmail(event.target.value)}
+                            borderRadius="1rem"
+                            borderColor={bordaInput}
                         />
                     </FormControl>
                     
@@ -105,6 +115,8 @@ const Cadastro = () => {
                             placeholder="Senha"
                             value={senha}
                             onChange={(event) => setSenha(event.target.value)}
+                            borderRadius="1rem"
+                            borderColor={bordaInput}
                         />
                     </FormControl>
                     
@@ -115,25 +127,28 @@ const Cadastro = () => {
                             type="password"
                             value={senhaConfirm}
                             onChange={(event) => setSenhaConfirm(event.target.value)}
+                            borderRadius="1rem"
+                            borderColor={bordaInput}
                         />
                     </FormControl>
                     
-                    <FormControl id="dataNascimento">
-                        <FormLabel>Data de Nascimento</FormLabel>
-                        <Input 
-                            type="date"
-                            value={dataNascimento}
-                            onChange={(event) => setDataNascimento(event.target.value)}
-                        />
-                    </FormControl>
-                    
+                    <InputData onChange={(data) => console.log(data)} />
+
                     <Stack spacing={4} direction="row" align="start" justify="space-between">
-                        <Link color="purple.500" onClick={handleLoginClick}>Já tem conta?</Link>
+                        <Link color={linkColor} onClick={handleLoginClick}>Já tem conta?</Link>
                     </Stack>
                     
-                    {erro && ( <Alert status="error" mt={4}><AlertIcon />{erro}</Alert>)}
+                    {/* {erro && ( <Alert status="error" mt={4}><AlertIcon />{erro}</Alert>)} */}
+
+                    {erro && (
+                        <Alert status="error" mt={4}>
+                            <AlertIcon />
+                            <AlertTitle mr={2}>Erro!</AlertTitle>
+                            <AlertDescription>{erro}</AlertDescription>
+                        </Alert>
+                        )}
                     
-                    <Button colorScheme="purple" onClick={handleCadastrar}>Cadastrar</Button>
+                    <Button colorScheme="blue" onClick={handleCadastrar}>Cadastrar</Button>
                 </Stack>
             </Flex>
         </HStack>
